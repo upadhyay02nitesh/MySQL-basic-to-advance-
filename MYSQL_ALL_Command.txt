@@ -1,0 +1,1488 @@
+-------------------------------************MYSQL Queries**********************----------------------
+Step 1. Enter Your Password 
+
+Check All  Database in Mysql Server--:
+	show databases;
+
+
+Database Creation--:
+	create databse my_db;
+
+Use Particular Database--:
+	use my_db;
+
+
+Table Creation--:
+       create table kullu
+     (
+     ID int not null,
+     NAME varchar(20),
+     DOB date
+     );
+
+Check Table attribute:
+	desc table_name;
+
+Insert Values--:
+	insert into kullu(ID,NAME, DOB)
+    	values(1,'kalu','2001-02-08');
+
+Multiple Values--:
+	insert into kullu(ID,NAME, DOB)
+     	values(2,'palu','2001-09-08'),
+     	(3,'lalu','2001-07-08');
+
+Check Table Values--:
+	select * from table_name;
+
+Check All Table In Database--:
+	show tables;
+
+Retreving limit data--:
+	select * from table_name limit n;
+
+
+Update Table Record--:
+	update kullu set id=5 where name='kalu';
+
+
+Delete Specific Table Record--:
+	 delete from kullu where id=1;
+
+
+Delete `All Table Record--:
+	truncate table table_name;
+
+
+
+Delete Whole Table --
+	drop table table_name;
+
+
+Delete Database --:
+	drop database db_name;
+
+
+Filtering Data From Table--:
+
+1. Where---:
+	select * from table_name where id=1;
+
+	select * from table_name where id!=1;
+
+	select * from table_name where id>=1;
+	
+	select * from table_name where id=1 and t_id=8;
+
+	select * from table_name where id=1 or t_id=8;
+	
+	select * from team where id=1 and (t_id=8 or id=2);
+
+2.IN---:
+	select * from team where id in(1,2);
+
+	select * from team where id not in(1,2);
+
+3.Between--:
+	select * from team where id between 1 and 6;
+
+	select * from team where id not between 1 and 5;
+
+Like--: Search Specific Pattern in Column
+	
+	 	select * from employee where Name like"n%";  (Start with n)
+
+		select * from employee where Name like"%h"; (End with h)
+
+ 		select * from employee where Name like"n%h"; (start n end h)
+
+	 	select * from employee where Name like"%ite%"; (middle element ite)
+
+		select * from employee where Name like"_i%"; (Second position i)
+	
+		select * from employee where Name like"p____%"; (start with p and 4 more character)
+
+		select * from employee where Name like"%e_h";  (last element h before blank and before e)
+
+		select * from employee where Name like"n_t%"; (Start n then blank then t)
+
+
+Unique Key--: Uniquely Identify Record(Column) + 1++ Unique key available in table + can be Null
+
+create table emply
+     (
+     id int unique key,
+     name varchar(20),
+     dob date,
+     unique key(name)
+     );
+
+     insert into emply(dob)
+     values('2001-02-08');  (Insert only null value)
+
+
+Add Unique key after creating table ---:
+
+	alter table kull
+	add constraint uc_uq unique(name);
+
+
+Delete Unique key from table--:
+	alter table kull
+        drop constraint uc_uq;
+
+
+Primary Key--: Uniquely Identify Record(Column) + 1(Only one in a table) + can not  be Null
+
+
+create table kullau
+    (
+     id int,
+     name varchar(20),
+     primary key(id)
+     );
+
+Add Primary key after creating table ---:
+
+	alter table kull
+	add constraint uc_pr Primary key(name);
+
+
+Delete Primary key from table--:
+	alter table kull
+    	drop primary key;  
+			    (Because in one table only one primary key are there so we can delete 
+			    directly by name without use constraint name)
+
+Not Null--: A field always contains some value this will not contain null value
+
+     create table kulli
+     (
+     id int not null,
+     name varchar(20)
+     );
+
+
+Check--: used to check given range of the condition
+
+create table jk
+     (
+     id int ,
+     age int,
+     check(age>=18)
+     );
+
+	insert into jk
+	values(1,17); (error because 17>=18 false)
+
+
+
+Add Check after creating table ---:
+
+	alter table kull
+	add constraint uc_ch Check(age>=18);
+
+
+Delete Check from table--:
+	alter table kull
+    	drop constraint uc_ch;
+
+Default ---:set default value in the field
+
+create table de
+     (
+     id int ,
+     name varchar(20) default 'KALLU'
+     );
+Add Default after creating table ---:
+
+	alter table kull
+	alter id set default 2;
+
+
+Delete Default from table--:
+	alter table kull
+    	alter id drop default;
+
+Auto Increment --: Value increasing one by one untill you changed the value
+	
+
+      create table jkl
+     (
+     id int not null auto_increment,
+     name varchar(20),
+     primary key(id)
+     );
+
+Changing the value--:	
+		 alter table jkl auto_increment=100;
+
+
+--------------------------------**************ALTER Command************-------------------
+
+1. Add Column--: by default add column in last position
+	alter table jkl
+   	add column dob date;
+	
+
+	**FIRST Position**
+
+	alter table jkl
+    	add column dtime time first;
+
+	** Particular position**
+	
+	alter table jkl
+    	add column mobile int after dtime;
+	
+
+2.Drop Column--:
+
+	 alter table jkl
+	 drop column mobile;
+
+3. Modify Column--: modify the column datatype
+
+	alter table jkl
+    	modify column name text(10);
+
+4. Change column name---:
+
+	alter table jkl
+    	rename column name to my_name;
+
+
+5. Changed Table Name--:
+	
+	rename table jkl to bkl; 
+
+*************************************Aggregate function****************************************
+
+1. Min()---:select min(emp_id) from employee;
+
+2. Max()--:select max(emp_id) from employee;
+
+3. Avg()--:select avg(emp_id) from employee;
+
+4. Count()--:select count(emp_id) from employee;
+
+5. Sum()--:select sum(emp_id) from employee;
+
+
+********************************-------Limit---------*************************
+Return limited number of records:
+
+	select * from employee limit 3;
+
+***************************************Distinct ***********************
+Ignrore Duplicate values---:
+	select distinct(salary) from employee;
+
+**********************************As(Alias)**********************************
+	select name as emp_name from employee;
+
+*******************************Order By********************************
+
+Arrange Element in ascending and descending order:
+	
+	select salary from employee order by salary; (By default ascending order increasing)
+
+	select distinct(salary) from employee order by salary desc; (Decreasing order)
+
+*********************************Group By***************************
+Grouping the similar type of element
+
+	select address, count(*) from employe group by address;
++---------+----------+
+| address | count(*) |
++---------+----------+
+| bhopal  |        1 |
+| HARDI   |        2 |
+| shahpur |        1 |
+| guna    |        1 |
+| rewa    |        1 |
++---------+----------+
+
+*************************************Having*********************************
+
+having clause-- similar to where clause but when we filter element with aggregate function 
+
+ 	select address, count(*) from employe group by address having count(*)>1;
++---------+----------+
+| address | count(*) |
++---------+----------+
+| HARDI   |        2 |
+______________________
+
+
+***************************************Date and Time *********************************
+1.Now()-----: select now();
++---------------------+
+| now()               |
++---------------------+
+| 2024-04-07 17:29:51 |
++---------------------+
+
+2.Curdate()----: select curdate();
++------------+
+| curdate()  |
++------------+
+| 2024-04-07 |
++------------+
+
+3.Curtime()---: select curtime();
++-----------+
+| curtime() |
++-----------+
+| 17:31:23  |
++-----------+
+
+4.	CREATE TABLE dtk 
+     (
+         id INT,
+         dob DATE NOT NULL DEFAULT(curtime())
+     );
+
+ 	insert into dtk(id)
+ 	values(1);
+
+	select * from dtk;
++------+------------+
+| id   | dob        |
++------+------------+
+|    1 | 2024-04-07 |
++------+------------+
+
+5.
+
+select day(dob) from dtk;
++----------+
+| day(dob) |
++----------+
+|        7 |
++----------+
+
+
+mysql> select month(dob) from dtk;
++------------+
+| month(dob) |
++------------+
+|          4 |
++------------+
+
+
+mysql> select year(dob) from dtk;
++-----------+
+| year(dob) |
++-----------+
+|      2024 |
++-----------+
+
+6.
+mysql> select time(now());
++-------------+
+| time(now()) |
++-------------+
+| 17:43:25    |
++-------------+
+
+7.
+select minute(time(now()));
++---------------------+
+| minute(time(now())) |
++---------------------+
+|                  45 |
++---------------------+
+
+select hour(time(now()));
++-------------------+
+| hour(time(now())) |
++-------------------+
+|                17 |
++-------------------+
+select second(time(now()));
++---------------------+
+| second(time(now())) |
++---------------------+
+|                  32 |
++---------------------+
+
+***********************Date Diff************************
+select datediff('2024-07-04','2001-02-08')/365.25;
++--------------------------------------------+
+| datediff('2024-07-04','2001-02-08')/365.25 |
++--------------------------------------------+
+|                                    23.4004 |
+_______________________________________________
+
+select round (datediff('2024-07-04','2001-02-08')/365.25,1);
++------------------------------------------------------+
+| round (datediff('2024-07-04','2001-02-08')/365.25,1) |
++------------------------------------------------------+
+|                                                 23.4 |
++------------------------------------------------------+
+
+select floor( datediff('2024-07-04','2001-02-08')/365.25);
++----------------------------------------------------+
+| floor( datediff('2024-07-04','2001-02-08')/365.25) |
++----------------------------------------------------+
+|                                                 23 |
++----------------------------------------------------+
+
+********************************Date Format*********************************
+
+SELECT DATE_FORMAT(now(), '%Y-%m-%d') AS formatted_date ;
++----------------+
+| formatted_date |
++----------------+
+| 2024-04-07     |
++----------------+
+
+SELECT DATE_FORMAT(now(), '%Y-%m-%d %H:%M:%S') AS formatted_date ;
++------------------------+
+| formatted_date         |
++------------------------+
+| 2024-04-07 18:April:03 |
++------------------------+
+
+%Y: Four-digit year (e.g., 2024)
+%y: Two-digit year (e.g., 24 for 2024)
+%m: Month (01-12)
+%d: Day of the month (01-31)
+%H: Hour (00-23) in 24-hour format
+%h: Hour (01-12) in 12-hour format
+%i: Minutes (00-59)
+%s: Seconds (00-59)
+%W: Full weekday name (e.g., Monday)
+%w: Weekday as a number (0 for Sunday, 1 for Monday, ..., 6 for Saturday)
+%M: Month name (e.g., January)
+%b: Abbreviated month name (e.g., Jan)
+%D: Day of the month with suffix (e.g., 1st, 2nd, 3rd)
+%T: Time in 24-hour HH:MM:SS format (e.g., 23:59:59)
+%r: Time in 12-hour hh:mm:ss format (e.g., 11:59:59 PM)
+%a: Abbreviated weekday name (e.g., Mon)
+
+SELECT DATE_FORMAT(now(), '%Y-%m-%d %T') AS formatted_date ;
++---------------------+
+| formatted_date      |
++---------------------+
+| 2024-04-07 18:10:08 |
++---------------------+
+
+
+
+
+mysql> SELECT DATE_FORMAT(now(), '%Y-%m-%d %r') AS formatted_date ;
++------------------------+
+| formatted_date         |
++------------------------+
+| 2024-04-07 06:10:34 PM |
++------------------------+
+
+
+******************************************MySql Function*******************************
+1. IF--:
+	SELECT IF(10 > 5, 'Greater than', 'Less than or equal to');
+
+2. Database()--:
+	SELECT Database();
+
+3.Bin()--: Dec to Bin
+	SELECT Bin(10); 
+
+4.User()--:
+	SELECT USER(); 
+
+5.Version()--: Latest version of MYSQL
+	SELECT Version(); 
+6.Lower()--:
+	SELECT Lower('Hello World'); 
+7.Upper()--:
+	SELECT Upper('Hello World'); 
+8.Left()--: Left element
+	 SELECT LEFT('Hello World', 5); 	
+| LEFT('Hello World', 5) |
++------------------------+
+| Hello                  |
++------------------------+
+
+9.Right()--:
+	SELECT RIGHT('apple', 3);
++-------------------+
+| RIGHT('apple', 3) |
++-------------------+
+| ple               |
++-------------------+
+
+10. Locate()--:
+	SELECT Locate('o', 'Hello World');
++----------------------------+
+| Locate('o', 'Hello World') |
++----------------------------+
+|                          5 |
++----------------------------+
+
+11.Insert()--:
+	SELECT INSERT('Hello World', 7, 0, 'My ');
++------------------------------------+
+| INSERT('Hello World', 7, 0, 'My ') |
++------------------------------------+
+| Hello My World                     |
++------------------------------------+
+
+12.Repeat()--:
+ 	SELECT Repeat('*', 3);
++----------------+
+| Repeat('*', 3) |
++----------------+
+| ***            |
++----------------+
+
+13.Round()--:
+ 	SELECT Round(3.14159, 2);
++-------------------+
+| Round(3.14159, 2) |
++-------------------+
+|              3.14 |
++-------------------+
+
+14. Floor()--:
+ 	SELECT Floor(3.8);
++------------+
+| Floor(3.8) |
++------------+
+|          3 |
+______________
+
+15.Mod()--:
+	SELECT Mod(7, 3);
++-----------+
+| Mod(7, 3) |
++-----------+
+|         1 |
++-----------+
+
+16.Ceil()--:
+	SELECT Ceil(44.6);
++------------+
+| Ceil(44.6) |
++------------+
+|         45 |
++------------+
+
+17. ABS()--:
+	SELECT Abs(-10) ;
++----------+
+| Abs(-10) |
++----------+
+|       10 |
++----------+
+
+15.Mid()--:
+		select mid(name,1,3) from hello;
+
+16.length()---:
+	select length(name) from hello;
+17.Concat()--:
+	select concat(name,' ',address) from hello;
++--------------------------+
+| concat(name,' ',address) |
++--------------------------+
+| jk bhopal                |
+| NITESH HARDI             |
+| JITESH HARDI             |
+| hITESH shahpur           |
+| kumar guna               |
+| radar rewa               |
++--------------------------+
+
+18.Reverse()--:
+	select reverse(name) from hello;
+
+
+
+**************************Create new table with existing one***************
+			   create table eml like employe;
+
+********************Copy data with existing(OLD) Table************************
+		    insert into empl select * from employe;
+
+
+************************Show how table created**********************
+			show create table eml;
+
+| eml   | CREATE TABLE `eml` (
+  `name` varchar(20) NOT NULL DEFAULT '0',
+  `Employeeid` int NOT NULL AUTO_INCREMENT,
+  `ADDRESS` text,
+  PRIMARY KEY (`Employeeid`)
+) 
+
+************************Show how db created**********************
+
+			show create database youtube;
+
++----------+
+| youtube  | CREATE DATABASE `youtube` / 
+
+***************************Create table like other db table***********************
+
+step 1. change database where you want to create your table
+step 2.		create table hello like youtube.employe;
+	youtube(Db where the old table are there)
+	employe(old table that is present in youtube db)
+
+(we create this table on other db)
+
+********************Copy data with existing(OLD) Table with another db************************
+		    insert into hello select * from youtube.employe;
+
+
+*********************************Foreign Key*********************************
+Foreign key = primary key in another table + no unique(Duplicate) + 
+can be null+ 1++ in one table
+
+create table hlo
+     (
+     oid int not null,
+     eid int,
+     foreign key(eid) references hello(employeeid)
+     );
+
+hello-> parent table
+employeeid-> primary key in parent table
+
+
+
+ insert into hlo
+ values(1,100);
+
+
+mysql> insert into hlo(oid)
+    -> values(2);
+
+
+mysql> select * from hlo;
++-----+------+
+| oid | eid  |
++-----+------+
+|   1 |  100 |
+|   2 | NULL |
++-----+------+
+(Can be null)
+
+mysql> insert into hlo
+    -> values(3,100);
+
+
+mysql> select * from hlo;
++-----+------+
+| oid | eid  |
++-----+------+
+|   1 |  100 |
+|   2 | NULL |
+|   3 |  100 |
++-----+------+
+
+(Can be Duplicate)
+
+
+
+		insert into hlo
+		values(5,200);
+ERROR 1452 (23000): Cannot add or update a child row:
+
+(but cannot be insert the value which is not present in parent table employeeid)
+
+
+Add Foreign Key after creating a table---:
+			
+
+	alter table emp
+     	add constraint fk_fp
+     	foreign key(s_id) references employe(employeeid);
+
+Delete Foreign Key--:
+	alter table emp
+    	drop constraint fk_fp;
+
+If Constraint name doesnot now---:
+	show create table orders;
+
+| orders | CREATE TABLE `orders` (
+  `OrderID` int NOT NULL,
+  `OrderNumber` int NOT NULL,
+  `CID` int DEFAULT NULL,
+  KEY `CID` (`CID`),
+  CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`CID`) REFERENCES `customer` (`cid`)
+
+
+
+	 alter table orders
+    	 drop  foreign key orders_ibfk_1 ;
+
+
+****************************************Join**************************
+Join == Cross Join + Some Condition
+
+Cross Join ==cartesian product 
+
+		select * from customer;
++-----+----------+------+
+| cid | cname    | age  |
++-----+----------+------+
+|   1 | Rahul    |   22 |
+|   2 | Rakhi    |   23 |
+|   3 | pawan    |   24 |
+|   4 | nitesh   |   21 |
+|   5 | abhishek |   27 |
+|   6 | radar    |   28 |
++-----+----------+------+
+
+	 select * from orders;
++---------+-------------+------+
+| OrderID | OrderNumber | CID  |
++---------+-------------+------+
+|      11 |         199 |    2 |
+|      22 |         299 |    1 |
++---------+-------------+------+
+
+
+	select * from customer cross join orders;
++-----+----------+------+---------+-------------+------+
+| cid | cname    | age  | OrderID | OrderNumber | CID  |
++-----+----------+------+---------+-------------+------+
+|   1 | Rahul    |   22 |      22 |         299 |    1 |
+|   1 | Rahul    |   22 |      11 |         199 |    2 |
+|   2 | Rakhi    |   23 |      22 |         299 |    1 |
+|   2 | Rakhi    |   23 |      11 |         199 |    2 |
+|   3 | pawan    |   24 |      22 |         299 |    1 |
+|   3 | pawan    |   24 |      11 |         199 |    2 |
+|   4 | nitesh   |   21 |      22 |         299 |    1 |
+|   4 | nitesh   |   21 |      11 |         199 |    2 |
+|   5 | abhishek |   27 |      22 |         299 |    1 |
+|   5 | abhishek |   27 |      11 |         199 |    2 |
+|   6 | radar    |   28 |      22 |         299 |    1 |
+|   6 | radar    |   28 |      11 |         199 |    2 |
++-----+----------+------+---------+-------------+------+
+
+Total data = n*m
+
+*****************************************Inner join************************************************
+inner join== cross join + matching condition
+
+	select * from customer inner join orders on  customer.cid=orders.cid;
++-----+-------+------+---------+-------------+------+
+| cid | cname | age  | OrderID | OrderNumber | CID  |
++-----+-------+------+---------+-------------+------+
+|   2 | Rakhi |   23 |      11 |         199 |    2 |
+|   1 | Rahul |   22 |      22 |         299 |    1 |
++-----+-------+------+---------+-------------+------+
+
+****************************************Left Join*****************************************
+
+Left join == Cross join + left condition== all record of left table and right table 
+	     whose record match with left table record other wise null
+
+	
+	select * from customer left join orders on  customer.cid=orders.cid;
++-----+----------+------+---------+-------------+------+
+| cid | cname    | age  | OrderID | OrderNumber | CID  |
++-----+----------+------+---------+-------------+------+
+|   1 | Rahul    |   22 |      22 |         299 |    1 |
+|   2 | Rakhi    |   23 |      11 |         199 |    2 |
+|   3 | pawan    |   24 |    NULL |        NULL | NULL |
+|   4 | nitesh   |   21 |    NULL |        NULL | NULL |
+|   5 | abhishek |   27 |    NULL |        NULL | NULL |
+|   6 | radar    |   28 |    NULL |        NULL | NULL |
++-----+----------+------+---------+-------------+------+
+
+
+Right Join ==Cross join + left condition== all record of right table and left table 
+	     whose record match with left table record other wise null
+
+
+	select * from orders right join customer on customer.cid=orders.cid;
++---------+-------------+------+-----+----------+------+
+| OrderID | OrderNumber | CID  | cid | cname    | age  |
++---------+-------------+------+-----+----------+------+
+|      22 |         299 |    1 |   1 | Rahul    |   22 |
+|      11 |         199 |    2 |   2 | Rakhi    |   23 |
+|    NULL |        NULL | NULL |   3 | pawan    |   24 |
+|    NULL |        NULL | NULL |   4 | nitesh   |   21 |
+|    NULL |        NULL | NULL |   5 | abhishek |   27 |
+|    NULL |        NULL | NULL |   6 | radar    |   28 |
++---------+-------------+------+-----+----------+------+
+
+
+*******************************************Full Join********************************************
+
+Full join== Left join union Right Join
+	
+	select * from customer left  join orders on  customer.cid=orders.cid
+                 union
+        select * from orders customer join orders on customer.cid=orders.cid;
++-----+----------+------+---------+-------------+------+
+| cid | cname    | age  | OrderID | OrderNumber | CID  |
++-----+----------+------+---------+-------------+------+
+|   1 | Rahul    |   22 |      22 |         299 |    1 |
+|   2 | Rakhi    |   23 |      11 |         199 |    2 |
+|   3 | pawan    |   24 |    NULL |        NULL | NULL |
+|   4 | nitesh   |   21 |    NULL |        NULL | NULL |
+|   5 | abhishek |   27 |    NULL |        NULL | NULL |
+|   6 | radar    |   28 |    NULL |        NULL | NULL |
+|  11 | 199      |    2 |      11 |         199 |    2 |
+|  22 | 299      |    1 |      22 |         299 |    1 |
++-----+----------+------+---------+-------------+------+
+
+     create table candidate1
+     (
+     id int ,
+     name varchar(20),
+     c_id int ,
+     primary key(id),
+     foreign key(c_id) references candidate1(id)
+     );
+
+
+
+     insert into candidate1(id,name)
+     values(1,'kalu'),
+********************************** Here we only insert primary value because without existing primary value we cannot insert foreign key value) 
+     
+    insert into candidate1
+    values(2,'mamu',1);
+
+    insert into candidate1
+    values(3,'mallu',2);
+
+    insert into candidate1
+    values(4,'mattu',3);
+
+
+    select c.name as emp_name,e.name as Manager_name from candidate1 c cross join candidate1 e
+    on c.c_id=e.id;
++----------+--------------+
+| emp_name | Manager_name |
++----------+--------------+
+| mamu     | kalu         |
+| mallu    | mamu         |
+| mattu    | mallu        |
++----------+--------------+
+
+
+Union---: only distinct value from both tables
+
+	 select * from candidate
+    	  	union
+         select * from candidate1;
++----+-------+------+
+| id | name  | c_id |
++----+-------+------+
+|  1 | kalu  | NULL |
+|  2 | mamu  |    1 |
+|  3 | mallu |    2 |
+|  4 | mamu  |    3 |
+|  5 | nanu  |    4 |
++----+-------+------+
+
+Union All--: All value returning from both tables
+
+	 select * from candidate
+   	    union all
+         select * from candidate1;
++----+-------+------+
+| id | name  | c_id |
++----+-------+------+
+|  1 | kalu  | NULL |
+|  2 | mamu  |    1 |
+|  3 | mallu |    2 |
+|  4 | mamu  |    3 |
+|  5 | nanu  |    4 |
+|  1 | kalu  | NULL |
+|  2 | mamu  |    1 |
+|  3 | mallu |    2 |
+|  4 | mamu  |    3 |
++----+-------+------+
+
+
+
+Intersect---:Common Value from both table
+
+in mysql no intersect keyword support so we use inner join with using to perform this operation.
+
+	select * from candidate
+    	inner join candidate1
+     	using (id);
++----+-------+------+-------+------+
+| id | name  | c_id | name  | c_id |
++----+-------+------+-------+------+
+|  1 | kalu  | NULL | kalu  | NULL |
+|  2 | mamu  |    1 | mamu  |    1 |
+|  3 | mallu |    2 | mallu |    2 |
+|  4 | mamu  |    3 | mamu  |    3 |
++----+-------+------+-------+------+
+
+View ---: Views in SQL are a kind of virtual table. A view also has rows and columns like tables, 
+but a view doesn’t store data on the disk like a table. 
+
+select customer.cname,orders.orderid from customer inner join orders on  customer.cid=orders.cid;
++-------+---------+
+| cname | orderid |
++-------+---------+
+| Rakhi |      11 |
+| Rahul |      22 |
++-------+---------+
+
+ create view emp_data as select customer.cname,orders.orderid from customer inner join orders on  customer.cid=orders.cid;
+
+
+mysql> select * from emp_data;
++-------+---------+
+| cname | orderid |
++-------+---------+
+| Rakhi |      11 |
+| Rahul |      22 |
++-------+---------+
+
+*********************************************Change view virtual table*********************************************
+alter view emp_data as select customer.cname,orders.orderid,orders.ordernumber from customer inner join orders on  customer.cid=orders.cid;
+
+
+mysql> select * from emp_data;
++-------+---------+-------------+
+| cname | orderid | ordernumber |
++-------+---------+-------------+
+| Rakhi |      11 |         199 |
+| Rahul |      22 |         299 |
++-------+---------+-------------+
+
+******************************************Change view name****************************************************
+
+ 	rename table emp_data to emp_record;
+
+
+mysql> select * from emp_record;
++-------+---------+-------------+
+| cname | orderid | ordernumber |
++-------+---------+-------------+
+| Rakhi |      11 |         199 |
+| Rahul |      22 |         299 |
++-------+---------+-------------+
+
+
+*******************************************************Delete View**********************************************
+
+drop view emp_record;
+
+*******************************************************************************************************************
+View is nothing but a virtual table that doesn't contain any data it is only store the command to 
+execute the particular operation.
+*******************************************************************************************************************
+	
+
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<Indexing>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+Indexing == separate memory location for particular column where value stored in sorted manner  and value pointed to our
+ parent table.
+
+B -tree is used for indexing .
+
+Used to optimize the query in db.
+
+we used indexing where our read and write is constant.
+
+Indexes are used to find rows with specific column values quickly.
+Without an index, MySQL must begin with the first row and then 
+read through the entire table to find the relevant rows.
+
+1. automatically create the index of primary and unique key.
+2. index apply on those column where the searching operation perform frequently.
+3. in join we used .
+
+
+
+
+select * from teach where age>=10;
++--------+------+----------+
+| name   | age  | teach_id |
++--------+------+----------+
+| komal  |   12 |        7 |
+| kamal  |   22 |        1 |
+| kamal  |   22 |        3 |
+| nikhil |   42 |        2 |
+| sahil  |   52 |        9 |
+| sahil  |   52 |       10 |
++--------+------+----------+
+6 rows in set (0.04 sec)
+
+mysql> create index tea on teach(age);
+Query OK, 0 rows affected, 1 warning (0.94 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> select * from teach where age>=10;
++--------+------+----------+
+| name   | age  | teach_id |
++--------+------+----------+
+| komal  |   12 |        7 |
+| kamal  |   22 |        1 |
+| kamal  |   22 |        3 |
+| nikhil |   42 |        2 |
+| sahil  |   52 |        9 |
+| sahil  |   52 |       10 |
++--------+------+----------+
+
+*********************************************Index in multiple column*********************************************
+ create index tea_in on teach(age,teach_id);
+
+show index from teach;
++-------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| Table | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment | Visible | Expression |
++-------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| teach |          0 | PRIMARY  |            1 | teach_id    | A         |           3 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
+| teach |          1 | tea_ind  |            1 | age         | A         |           3 |     NULL |   NULL | YES  | BTREE      |         |               | YES     | NULL       |
+| teach |          1 | tea      |            1 | age         | A         |           4 |     NULL |   NULL | YES  | BTREE      |         |               | YES     | NULL       |
+| teach |          1 | tea_in   |            1 | age         | A         |           4 |     NULL |   NULL | YES  | BTREE      |         |               | YES     | NULL       |
+| teach |          1 | tea_in   |            2 | teach_id    | A         |           4 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
++-------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+----
+
+
+
+
+
+
+*************************************Delete index********************************************
+
+				drop index tea on teach;
+
+
+*********************************************************  Stored Procedures  ***********************************************************************
+
+Prcedure --: A collection of pre compiled sql statements stored inside the database.
+
+To Perform one or more dml operation in database.
+
++--------+------+----------+
+| name   | age  | teach_id |
++--------+------+----------+
+| kamal  |   22 |        1 |
+| nikhil |   42 |        2 |
+| kamal  |   22 |        3 |
+| komal  |   12 |        7 |
+| sahil  |   52 |        9 |
+| sahil  |   52 |       10 |
+_____________________________
+ 
+
+***************************************Create Procedure*****************************************
+DELIMITER &&
+CREATE PROCEDURE GET_CUST()
+BEGIN
+INSERT INTO TEACH VALUES('BABA',20,16);
+SELECT * FROM TEACH;
+END && 
+DELIMITER ;
+
+**************************************Call Procedure*********************************************
+
+
+CALL GET_CUST();
++--------+------+----------+
+| name   | age  | teach_id |
++--------+------+----------+
+| kamal  |   22 |        1 |
+| nikhil |   42 |        2 |
+| kamal  |   22 |        3 |
+| komal  |   12 |        7 |
+| sahil  |   52 |        9 |
+| sahil  |   52 |       10 |
+| BABA   |   20 |       16 |
++--------+------+----------+
+
+
+*******************************************Stored Function***********************************
+It is a set of sql statements that perform some task and return single value.
+
+Procedure                             v/s                       function
+
+								must return a value
+Optional , it can return 
+zero or n value
+
+input + output parameter                                        only input parameter
+
+it cannot be called from a function                             it can be called from procedure
+
+
+
+
+DELIMITER $$
+CREATE FUNCTION CUST_JOB(AGE INT)
+RETURNS VARCHAR(20)
+DETERMINISTIC
+BEGIN 
+    DECLARE CUST_JOB VARCHAR(20);
+    IF AGE >= 16 THEN 
+        SET CUST_JOB = 'ENGINEER';
+    ELSE
+        SET CUST_JOB = 'STUDENT';
+    END IF;
+    RETURN CUST_JOB;
+END$$
+DELIMITER ;
+
+		
+select name ,age,cust_job(age) from teach;
+
+
+
+sahil	52	ENGINEER
+sahil	52	ENGINEER
+nikhil	42	ENGINEER
+komal	12	STUDENT
+kamal	22	ENGINEER
+kamal	22	ENGINEER
+BABA	20	ENGINEER
+
+
+
+************************************************************* Trigger ******************************************************************************
+ 
+Special type of stored procedure that is invoked automatically in response to an event.
+
+Each trigger is associated with a table which is activated on any DML statement such as insert , update , or delete.
+
+Uses--:
+1. Validate data even before they are inserted or updated.
+2. Increase the performance of sql queries because it does not ned to compile each time thw query is executed.
+
+
+Syntax---:
+
+CREATE TRIGGER trigger_name
+{BEFORE | AFTER} {INSERT | UPDATE | DELETE}
+ON table_name
+FOR EACH ROW
+BEGIN
+    -- SQL statements to be executed when the trigger fires
+END;
+
+
+
+
+DELIMITER //
+
+CREATE TRIGGER log_changes
+before INSERT ON teach
+FOR EACH ROW
+BEGIN
+	IF NEW TEACH.ID <0 THEN SET TEACH.ID=0;
+    
+END;
+//
+
+
+insert into teach
+values('lalu',-11,17);
+
+select * from teach;
+
+kamal	22	1
+nikhil	42	2
+kamal	22	3
+komal	12	7
+sahil	52	9
+sahil	52	10
+BABA	20	16
+lalu	0	17
+
+
+
+********************************************Window Function****************************************
+It applies aggregate,ranking and analystics fuctions over a particular window(set of rows).
+It generate sigle output.
+Over Clause is used in window function.
+
+Window function Types----:
+		Aggreagate           Ranking                          Analytics
+		Sum		     ROW_NUMBER			      LEAD
+		AVG		     RANK			      FIRST_VALUE
+		COUNT		     DENSE_RANK			      LAST_VALUE
+		MIN		     PERCENTAGE_RANK		       
+		MAX		     MY
+
+
+
+1.Aggreate---:
+					select * from com;
++----+--------------------------+
+| id | department               |
++----+--------------------------+
+|  1 | Marketing                |
+|  2 | Engineering              |
+|  3 | Human Resources          |
+|  4 | Finance                  |
+|  5 | Sales                    |
+|  6 | Customer Service         |
+|  7 | Research and Development |
+|  8 | Operations               |
+|  9 | Information Technology   |
+| 10 | Administration           |
+| 11 | Marketing                |
+| 12 | Engineering              |
+| 13 | Human Resources          |
+| 14 | Finance                  |
+| 15 | Sales                    |
+| 16 | Customer Service         |
+| 17 | Research and Development |
+| 18 | Operations               |
+| 19 | Information Technology   |
+| 20 | Administration           |
++----+--------------------------+
+
+************************************************************************************************************
+
+SELECT 
+    ID,
+    department,
+    COUNT(*) OVER (PARTITION BY department) AS total_employees,
+    SUM(ID) OVER (PARTITION BY department) AS total_SUM,
+    AVG(ID) OVER (PARTITION BY department) AS total_AVG,
+    MAX(ID) OVER (PARTITION BY department) AS MAX,
+    MIN(ID) OVER (PARTITION BY department) AS MIN
+FROM COM;
+
+
+>>Partition Means Grouping the value 
+
+
+ ID | department               | total_employees | total_SUM | total_AVG | MAX  | MIN  |
++----+--------------------------+-----------------+-----------+-----------+------+------+
+| 10 | Administration           |               2 |        30 |   15.0000 |   20 |   10 |
+| 20 | Administration           |               2 |        30 |   15.0000 |   20 |   10 |
+|  6 | Customer Service         |               2 |        22 |   11.0000 |   16 |    6 |
+| 16 | Customer Service         |               2 |        22 |   11.0000 |   16 |    6 |
+|  2 | Engineering              |               2 |        14 |    7.0000 |   12 |    2 |
+| 12 | Engineering              |               2 |        14 |    7.0000 |   12 |    2 |
+|  4 | Finance                  |               2 |        18 |    9.0000 |   14 |    4 |
+| 14 | Finance                  |               2 |        18 |    9.0000 |   14 |    4 |
+|  3 | Human Resources          |               2 |        16 |    8.0000 |   13 |    3 |
+| 13 | Human Resources          |               2 |        16 |    8.0000 |   13 |    3 |
+|  9 | Information Technology   |               2 |        28 |   14.0000 |   19 |    9 |
+| 19 | Information Technology   |               2 |        28 |   14.0000 |   19 |    9 |
+|  1 | Marketing                |               2 |        12 |    6.0000 |   11 |    1 |
+| 11 | Marketing                |               2 |        12 |    6.0000 |   11 |    1 |
+|  8 | Operations               |               2 |        26 |   13.0000 |   18 |    8 |
+| 18 | Operations               |               2 |        26 |   13.0000 |   18 |    8 |
+|  7 | Research and Development |               2 |        24 |   12.0000 |   17 |    7 |
+| 17 | Research and Development |               2 |        24 |   12.0000 |   17 |    7 |
+|  5 | Sales                    |               2 |        20 |   10.0000 |   15 |    5 |
+| 15 | Sales                    |               2 |        20 |   10.0000 |   15 |    5 |
++----+--------------------------+-----------------+-----------+-----------+------+------+
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Without Partition>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+SELECT 
+    ID,
+    department,
+    COUNT(*) OVER () AS total_employees,
+    SUM(ID) OVER () AS total_SUM,
+    AVG(ID) OVER () AS total_AVG,
+    MAX(ID) OVER () AS MAX,
+    MIN(ID) OVER () AS MIN
+FROM com;
+
+_________________________________________________________________________________________
+| ID | department               | total_employees | total_SUM | total_AVG | MAX  | MIN  |
++----+--------------------------+-----------------+-----------+-----------+------+------+
+|  1 | Marketing                |              20 |       210 |   10.5000 |   20 |    1 |
+|  2 | Engineering              |              20 |       210 |   10.5000 |   20 |    1 |
+|  3 | Human Resources          |              20 |       210 |   10.5000 |   20 |    1 |
+|  4 | Finance                  |              20 |       210 |   10.5000 |   20 |    1 |
+|  5 | Sales                    |              20 |       210 |   10.5000 |   20 |    1 |
+|  6 | Customer Service         |              20 |       210 |   10.5000 |   20 |    1 |
+|  7 | Research and Development |              20 |       210 |   10.5000 |   20 |    1 |
+|  8 | Operations               |              20 |       210 |   10.5000 |   20 |    1 |
+|  9 | Information Technology   |              20 |       210 |   10.5000 |   20 |    1 |
+| 10 | Administration           |              20 |       210 |   10.5000 |   20 |    1 |
+| 11 | Marketing                |              20 |       210 |   10.5000 |   20 |    1 |
+| 12 | Engineering              |              20 |       210 |   10.5000 |   20 |    1 |
+| 13 | Human Resources          |              20 |       210 |   10.5000 |   20 |    1 |
+| 14 | Finance                  |              20 |       210 |   10.5000 |   20 |    1 |
+| 15 | Sales                    |              20 |       210 |   10.5000 |   20 |    1 |
+| 16 | Customer Service         |              20 |       210 |   10.5000 |   20 |    1 |
+| 17 | Research and Development |              20 |       210 |   10.5000 |   20 |    1 |
+| 18 | Operations               |              20 |       210 |   10.5000 |   20 |    1 |
+| 19 | Information Technology   |              20 |       210 |   10.5000 |   20 |    1 |
+| 20 | Administration           |              20 |       210 |   10.5000 |   20 |    1 |
++----+--------------------------+-----------------+-----------+-----------+------+------+
+
+
+*************************************************Ranking****************************************************
+
+SELECT 
+    ID,
+    department,
+    ROW_NUMBER() OVER (PARTITION BY department ) AS row_num,
+    RANK() OVER (PARTITION BY department ) AS rank_num,
+    DENSE_RANK() OVER (PARTITION BY department ) AS dense_rank_num,
+    PERCENT_RANK() OVER (PARTITION BY department ) AS percentile_rank
+FROM com;
+
++----+--------------------------+---------+----------+----------------+-----------------+
+| ID | department               | row_num | rank_num | dense_rank_num | percentile_rank |
++----+--------------------------+---------+----------+----------------+-----------------+
+| 10 | Administration           |       1 |        1 |              1 |               0 |
+| 20 | Administration           |       2 |        1 |              1 |               0 |
+|  6 | Customer Service         |       1 |        1 |              1 |               0 |
+| 16 | Customer Service         |       2 |        1 |              1 |               0 |
+|  2 | Engineering              |       1 |        1 |              1 |               0 |
+| 12 | Engineering              |       2 |        1 |              1 |               0 |
+|  4 | Finance                  |       1 |        1 |              1 |               0 |
+| 14 | Finance                  |       2 |        1 |              1 |               0 |
+|  3 | Human Resources          |       1 |        1 |              1 |               0 |
+| 13 | Human Resources          |       2 |        1 |              1 |               0 |
+|  9 | Information Technology   |       1 |        1 |              1 |               0 |
+| 19 | Information Technology   |       2 |        1 |              1 |               0 |
+|  1 | Marketing                |       1 |        1 |              1 |               0 |
+| 11 | Marketing                |       2 |        1 |              1 |               0 |
+|  8 | Operations               |       1 |        1 |              1 |               0 |
+| 18 | Operations               |       2 |        1 |              1 |               0 |
+|  7 | Research and Development |       1 |        1 |              1 |               0 |
+| 17 | Research and Development |       2 |        1 |              1 |               0 |
+|  5 | Sales                    |       1 |        1 |              1 |               0 |
+| 15 | Sales                    |       2 |        1 |              1 |               0 |
++----+--------------------------+---------+----------+----------------+-----------------+
+
+*************************************Without Partition********************************************
+SELECT 
+    ID,
+    department,
+    ROW_NUMBER() OVER (ORDER BY DEPARTMENT) AS row_num,
+    RANK() OVER (ORDER BY DEPARTMENT) AS rank_num,
+    DENSE_RANK() OVER (ORDER BY DEPARTMENT) AS dense_rank_num,
+    PERCENT_RANK() OVER (ORDER BY DEPARTMENT) AS percentile_rank
+FROM com;
+
++----+--------------------------+---------+----------+----------------+---------------------+
+| ID | department               | row_num | rank_num | dense_rank_num | percentile_rank     |
++----+--------------------------+---------+----------+----------------+---------------------+
+| 10 | Administration           |       1 |        1 |              1 |                   0 |
+| 20 | Administration           |       2 |        1 |              1 |                   0 |
+|  6 | Customer Service         |       3 |        3 |              2 | 0.10526315789473684 |
+| 16 | Customer Service         |       4 |        3 |              2 | 0.10526315789473684 |
+|  2 | Engineering              |       5 |        5 |              3 | 0.21052631578947367 |
+| 12 | Engineering              |       6 |        5 |              3 | 0.21052631578947367 |
+|  4 | Finance                  |       7 |        7 |              4 |  0.3157894736842105 |
+| 14 | Finance                  |       8 |        7 |              4 |  0.3157894736842105 |
+|  3 | Human Resources          |       9 |        9 |              5 | 0.42105263157894735 |
+| 13 | Human Resources          |      10 |        9 |              5 | 0.42105263157894735 |
+|  9 | Information Technology   |      11 |       11 |              6 |  0.5263157894736842 |
+| 19 | Information Technology   |      12 |       11 |              6 |  0.5263157894736842 |
+|  1 | Marketing                |      13 |       13 |              7 |   0.631578947368421 |
+| 11 | Marketing                |      14 |       13 |              7 |   0.631578947368421 |
+|  8 | Operations               |      15 |       15 |              8 |  0.7368421052631579 |
+| 18 | Operations               |      16 |       15 |              8 |  0.7368421052631579 |
+|  7 | Research and Development |      17 |       17 |              9 |  0.8421052631578947 |
+| 17 | Research and Development |      18 |       17 |              9 |  0.8421052631578947 |
+|  5 | Sales                    |      19 |       19 |             10 |  0.9473684210526315 |
+| 15 | Sales                    |      20 |       19 |             10 |  0.9473684210526315 |
++----+--------------------------+---------+----------+----------------+---------------------+
+
+
+**************************************
+
+SELECT 
+    ID,
+    department,
+    FIRST_VALUE(ID) OVER (PARTITION BY department ORDER BY ID) AS first,
+    LAST_VALUE(ID) OVER (PARTITION BY department ORDER BY ID) AS LAST,
+
+    LEAD(ID) OVER (PARTITION BY department ORDER BY ID) AS lead_value,
+    LAG(ID) OVER (PARTITION BY department ORDER BY ID) AS lag_value
+FROM COM ;
+
++----+--------------------------+-------+------+------------+-----------+
+| ID | department               | first | LAST | lead_value | lag_value |
++----+--------------------------+-------+------+------------+-----------+
+| 10 | Administration           |    10 |   10 |         20 |      NULL |
+| 20 | Administration           |    10 |   20 |       NULL |        10 |
+|  6 | Customer Service         |     6 |    6 |         16 |      NULL |
+| 16 | Customer Service         |     6 |   16 |       NULL |         6 |
+|  2 | Engineering              |     2 |    2 |         12 |      NULL |
+| 12 | Engineering              |     2 |   12 |       NULL |         2 |
+|  4 | Finance                  |     4 |    4 |         14 |      NULL |
+| 14 | Finance                  |     4 |   14 |       NULL |         4 |
+|  3 | Human Resources          |     3 |    3 |         13 |      NULL |
+| 13 | Human Resources          |     3 |   13 |       NULL |         3 |
+|  9 | Information Technology   |     9 |    9 |         19 |      NULL |
+| 19 | Information Technology   |     9 |   19 |       NULL |         9 |
+|  1 | Marketing                |     1 |    1 |         11 |      NULL |
+| 11 | Marketing                |     1 |   11 |       NULL |         1 |
+|  8 | Operations               |     8 |    8 |         18 |      NULL |
+| 18 | Operations               |     8 |   18 |       NULL |         8 |
+|  7 | Research and Development |     7 |    7 |         17 |      NULL |
+| 17 | Research and Development |     7 |   17 |       NULL |         7 |
+|  5 | Sales                    |     5 |    5 |         15 |      NULL |
+| 15 | Sales                    |     5 |   15 |       NULL |         5 |
++----+--------------------------+-------+------+------------+-----------+
+
+
+*******************************************CASE - IF ******************************************************
+
+ SELECT * FROM STUDENTS;
++----+---------+------------+
+| ID | name    | percentage |
++----+---------+------------+
+|  1 | John    |      85.50 |
+|  2 | Emma    |      92.30 |
+|  3 | Michael |      78.00 |
+|  4 | Sophia  |      89.80 |
+|  5 | William |      91.20 |
++----+---------+------------+
+
+SELECT 
+    ID,
+    NAME,
+    PERCENTAGE,
+    IF(PERCENTAGE >= 33, 'PASS', 'FAIL') AS RESULT
+FROM 
+    STUDENTS;
+
++----+---------+------------+--------+
+| ID | NAME    | PERCENTAGE | RESULT |
++----+---------+------------+--------+
+|  1 | John    |      85.50 | PASS   |
+|  2 | Emma    |      92.30 | PASS   |
+|  3 | Michael |      78.00 | PASS   |
+|  4 | Sophia  |      89.80 | PASS   |
+|  5 | William |      91.20 | PASS   |
++----+---------+------------+--------+
+
+**********************************CASE - WHEN ********************************************************
+SELECT 
+    ID,
+    NAME,
+    PERCENTAGE,
+    CASE 
+	WHEN PERCENTAGE>=80 AND PERCENTAGE<=100 THEN "MERIT"
+        WHEN PERCENTAGE>=60 AND PERCENTAGE<=80 THEN "I"
+        WHEN PERCENTAGE>=50 AND PERCENTAGE<=60 THEN "II"
+        WHEN PERCENTAGE>=33 AND PERCENTAGE<=50 THEN "III"
+        WHEN PERCENTAGE<33 THEN "FAIL"
+        ELSE "NOT CORRECT"
+   END AS GRADE
+FROM STUDENTS;
+
+
++----+---------+------------+-------+
+| ID | NAME    | PERCENTAGE | GRADE |
++----+---------+------------+-------+
+|  1 | John    |      85.50 | MERIT |
+|  2 | Emma    |      92.30 | MERIT |
+|  3 | Michael |      78.00 | I     |
+|  4 | Sophia  |      89.80 | MERIT |
+|  5 | William |      91.20 | MERIT |
++----+---------+------------+-------+
